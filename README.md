@@ -1,23 +1,27 @@
 # ToyCompiler
 A small tool for Project MCU
 To
+
 Convert Assembly Language to Machine Code
 
 You need to write code in file "source" , and machine code will be generated in file "init.mem"
 
 Will Do
+
 Convert C Language to Machine Code 
+
 If possible 
 
-The compiler supports "Assembly Like" Language, all possibilities are listed below:
-| ADD A B                | SUB A B     | MUL A B     |
-| ---------------------- | ----------- | ----------- |
-| DIV A B                | AND A B     | OR A B      |
-| NOT A                  | SHL A       | SHR A       |
-| More ActionsMOV A ADDR | MOV ADDR A  | MOV A B     |
-| MOV B A                | MOV AH DATA | MOV AL DATA |
-| MOV BL DATA            | JDB ADDR    | AJMP ADDR   |
-| MOV A PIN              | MOV POUT A  |             |
+The compiler supports "Assembly Like" Language,
+for example:
+
+ADD A B 
+
+SUB A B 
+
+MUL A B 
+
+Attention should be paid that there is no "," between A and B
 
 
 
