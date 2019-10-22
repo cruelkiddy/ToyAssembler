@@ -10,7 +10,7 @@ Convert C Language to Machine Code
 If possible 
 
 The compiler supports "Assembly Like" Language, all possibilities are listed below:
-
+| ---- | ---- | ---- |
 | ADD A B   |  SUB A B |     MUL A B |
 | DIV A B    | AND A B   |  OR A B  |
 | NOT A       | SHL A |       SHR A |
