@@ -1,5 +1,7 @@
+global Done
 Done = 0
 def generate_operator(CookedExp):
+    global Done
     identifier = CookedExp[0]
     A = CookedExp[1]
     if identifier == "ADD":
@@ -29,7 +31,7 @@ def generate_operator(CookedExp):
     elif identifier == "SHR":
         Done = 1
         return "00001001"
-    elif identifier == "MOV":   # TODO : MOV AH im8 ; MOV AL im8 ; MOV BL im8 ; MOV A HA
+    elif identifier == "MOV":
         B = CookedExp[2]
         if A == "A" and B == "B":
             Done = 1
@@ -43,10 +45,19 @@ def generate_operator(CookedExp):
         elif B == "A" and A == "POUT":
             Done = 1
             return "01100001"
+        elif A == "A" and B == "HA":
+            Done = 1
+            return "00100110"
         elif A == "A" and B != "B":
             return "00100000"
         elif B == "A" and A != "B":
             return "00100001"
+        elif A == "AH":
+            return "00100100"
+        elif A == "AL":
+            return "00100101"
+        elif A == "BL":
+            return "00101101"
     elif identifier == "JZ":
         return "01000000"
     elif identifier == "JAB":
@@ -83,22 +94,26 @@ def generate_address(CookedExp):
 file = open('source', 'r')
 obj = open('init.mem', 'w')
 line_buffer = ""
+LineCounter = 0
 while True:
+    LineCounter += 1
+    print(LineCounter)
     line = file.readline().strip('\n')
     if not line:
         break
     else:
         CookedExp = line.split(' ')
         line_buffer += generate_operator(CookedExp)
-        if Done:
+        if Done == 1:
             Done = 0
             line_buffer += "00000000"
             obj.writelines(line_buffer)
+            obj.writelines("\n")
             line_buffer = ""
             continue
         line_buffer += generate_address(CookedExp)
-        line_buffer += generate_address(CookedExp)
         obj.writelines(line_buffer)
+        obj.writelines("\n")
         line_buffer = ""
 
 
