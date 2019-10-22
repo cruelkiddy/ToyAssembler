@@ -85,7 +85,7 @@ def generate_address(CookedExp):
         address = A
     prefix = address[0:2]
     if prefix == "0b":
-        return address[2:]
+        return address[2:].zfill(8)
     elif prefix == "0x":
         num = int(address[2:], 16)
         return str(bin(num))[2:].zfill(8)
