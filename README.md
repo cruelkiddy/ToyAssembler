@@ -2,9 +2,9 @@
 A small tool for Project MCU
 To Convert Assembly Language to Machine Code
 
-### Guide
+### User Guide
 
-You need to write code in file "source" , 
+You need to write code(more details in ***Syntax Supported***) in file "source" , 
 
 invoke `python3 main.py`
 
@@ -14,11 +14,9 @@ and machine code will be generated in file "init.mem"
 
 ### TODO and Limitations
 
-Convert C Language to Machine Code 
+- Convert C Language to Machine Code If possible 
 
-If possible 
-
-Support syntax in MCU3 
+- Support syntax in MCU3 
 
 ### Syntax Supported
 
