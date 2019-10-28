@@ -42,6 +42,9 @@ def generate_operator(CookedExp):
         elif A == "A" and B == "PIN":
             Done = 1
             return "01100000"
+        elif A == "A" and B == "HA":
+            Done = 1
+            return "00100110"
         elif B == "A" and A == "POUT":
             Done = 1
             return "01100001"
@@ -74,9 +77,9 @@ def generate_address(CookedExp):
     A = CookedExp[1]
     if CookedExp[0] == "MOV":
         B = CookedExp[2]
-        if A != "A" and A != "B":
+        if A != "A" and A != "B" and A != "AH" and A != "AL" and A != "BL":
             address = A
-        elif B != "A" and B != "B":
+        elif B != "A" and B != "B" and B != "HA":
             address = B
         else:
             print("MOV Error")
