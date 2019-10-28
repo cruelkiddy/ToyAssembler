@@ -4,9 +4,9 @@ To Convert Assembly Language to Machine Code
 
 ### User Guide
 
-You need to write code(more details in ***Syntax Supported***) in file "source" , 
+You need to write code(more details in ***Syntax Supported***) in a file (suppose filename = “SourceCode”) , 
 
-invoke `python3 main.py`
+invoke `python3 main.py SourceCode`
 
 and machine code will be generated in file "init.mem"
 
@@ -16,7 +16,7 @@ and machine code will be generated in file "init.mem"
 
 - Convert C Language to Machine Code If possible 
 
-- Support syntax in MCU3 
+- Skip Blank Line in Compilation
 
 ### Syntax Supported
 
@@ -32,5 +32,9 @@ MUL A B
 MOV A ADDR
 
 Attention should be paid that there is no "," between A and B. So technically this is not Assembly Language but "Assembly Like" Language
+
+***Comment*** should be started with "#"
+
+***No blank line*** is allowed between valid code line
 
 Notice:DATA and ADDR can be written in binary(eg:0b00100000) or hexadecimal(eg:0xab). 
