@@ -1,8 +1,22 @@
+import sys
+sourceFile = sys.argv[1]
 global Done
+global TotallyDone
 Done = 0
+TotallyDone = 0
 def generate_operator(CookedExp):
     global Done
+    global TotallyDone
     identifier = CookedExp[0]
+    if identifier == "SETP":
+        TotallyDone = 1
+        return "1000000000010000"
+    elif identifier == "CLRP":
+        TotallyDone = 1
+        return "1000000000010001"
+    elif identifier == "RETI":
+        TotallyDone = 1
+        return "1000000000001010" 
     A = CookedExp[1]
     if identifier == "ADD":
         Done = 1
@@ -36,6 +50,21 @@ def generate_operator(CookedExp):
         if A == "A" and B == "B":
             Done = 1
             return "00100010"
+        elif A == "TDI" and B == "A":
+            TotallyDone = 1
+            return "1000000000000000"
+        elif A == "TC" and B == "A":
+            TotallyDone = 1
+            return "1000000000000001"
+        elif A == "A" and B == "TDO":
+            TotallyDone = 1
+            return "1000000000000010"
+        elif A == "INTR" and B == "A":
+            TotallyDone = 1
+            return "1000000000001000"
+        elif A == "A" and B == "INTR":
+            TotallyDone = 1
+            return "1000000000001001" 
         elif A == "B" and B == "A":
             Done = 1
             return "00100011"
@@ -68,7 +97,7 @@ def generate_operator(CookedExp):
     elif identifier == "JDB":
         return "01000010"
     elif identifier == "AJMP":
-        return "01000011"
+        return "01000011"           
     else:
         print("Operator Error")
         exit(0)
@@ -94,30 +123,41 @@ def generate_address(CookedExp):
         return str(bin(num))[2:].zfill(8)
 
 
-file = open('source', 'r')
+file = open(sourceFile, 'r')
 obj = open('init.mem', 'w')
 line_buffer = ""
 LineCounter = 0
 while True:
     LineCounter += 1
-    print(LineCounter)
+    print("Parsing Line : "+ str(LineCounter))
     line = file.readline().strip('\n')
     if not line:
         break
     else:
+        if line[0] == "#": # Support Comment in source
+            continue
         CookedExp = line.split(' ')
         line_buffer += generate_operator(CookedExp)
+        if TotallyDone == 1:
+            TotallyDone = 0
+            obj.writelines(line_buffer)
+            obj.writelines("\n")
+            line_buffer = ""
+            continue  
         if Done == 1:
             Done = 0
             line_buffer += "00000000"
             obj.writelines(line_buffer)
             obj.writelines("\n")
             line_buffer = ""
-            continue
+            continue          
         line_buffer += generate_address(CookedExp)
         obj.writelines(line_buffer)
         obj.writelines("\n")
         line_buffer = ""
+print("Compilation Done!")
+file.close()
+obj.close()
 
 
 
