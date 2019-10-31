@@ -11,6 +11,12 @@ def generate_operator(CookedExp):
     if identifier == "SETP":
         TotallyDone = 1
         return "1000000000010000"
+    elif identifier == "CLRT":
+        TotallyDone = 1
+        return "1000000011111111"
+    elif identifier == "CLRE":
+        TotallyDone = 1
+        return "1000000011111110"
     elif identifier == "CLRP":
         TotallyDone = 1
         return "1000000000010001"
