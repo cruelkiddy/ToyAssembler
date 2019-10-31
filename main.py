@@ -129,7 +129,7 @@ line_buffer = ""
 LineCounter = 0
 while True:
     LineCounter += 1
-    print("Parsing Line : "+ str(LineCounter))
+    print("Parsing Line {line_number} : ".format(line_number=str(LineCounter)), end="")
     line = file.readline().strip('\n')
     if not line:
         break
@@ -142,6 +142,7 @@ while True:
             TotallyDone = 0
             obj.writelines(line_buffer)
             obj.writelines("\n")
+            print("{content}".format(content=str(hex(int(line_buffer, 2)))))
             line_buffer = ""
             continue  
         if Done == 1:
@@ -149,11 +150,13 @@ while True:
             line_buffer += "00000000"
             obj.writelines(line_buffer)
             obj.writelines("\n")
+            print("{content}".format(content=str(hex(int(line_buffer, 2)))))
             line_buffer = ""
             continue          
         line_buffer += generate_address(CookedExp)
         obj.writelines(line_buffer)
         obj.writelines("\n")
+        print("{content}".format(content=str(hex(int(line_buffer, 2)))))
         line_buffer = ""
 print("Compilation Done!")
 file.close()
