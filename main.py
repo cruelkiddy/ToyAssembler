@@ -135,6 +135,7 @@ while True:
         break
     else:
         if line[0] == "#": # Support Comment in source
+            print("")
             continue
         CookedExp = line.split(' ')
         line_buffer += generate_operator(CookedExp)
