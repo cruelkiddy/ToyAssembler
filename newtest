@@ -1,0 +1,2 @@
+MOV A A+1
+MOV A A-1

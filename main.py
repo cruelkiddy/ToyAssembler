@@ -56,6 +56,12 @@ def generate_operator(CookedExp):
         if A == "A" and B == "B":
             Done = 1
             return "00100010"
+        elif A == "A" and B == "A+1":
+            TotallyDone = 1
+            return "0000101000000000"
+        elif A == "A" and B == "A-1":
+            TotallyDone = 1
+            return "0000101100000000"
         elif A == "TDI" and B == "A":
             TotallyDone = 1
             return "1000000000000000"
