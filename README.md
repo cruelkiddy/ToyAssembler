@@ -1,4 +1,4 @@
-# ToyCompiler
+# ToyAssembler
 A small tool for Project MCU
 To Convert Assembly Language to Machine Code
 
